@@ -25,12 +25,13 @@ View(x)
 #9 = susceptible MESO
 #10 = susceptible 24D
 
-# this is when comparing each with each, it follows above classification
+# This is when comparing each with each, it follows the above classification
 group <- factor(c(1,1,1,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,6,6,6,7,7,7,8,8,8,9,9,9,10,10,10))
 
-# this is when comparing SvR
+# This is when comparing SvR
 # group <- factor(c(2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1))
-# this is when we are comparing ALl Sus vs each R
+
+# This is when we are comparing ALl Sus vs each R
 # group <- factor(c(1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4))
 
 # assigning groups to each group

@@ -54,7 +54,7 @@ fastp -i ${file}_R1_001.fastq.gz  -I ${file}_R2_001.fastq.gz -o ${data}/cleaned_
 -j = file name of quality control file in json format \
 -h = file name of quality control file in html format
 
-## 3 - aliging the raw reads to the transcriptome(3_hisat2_align_sam_to_bam.sh)
+## 3 - aligning the raw reads to the transcriptome(3_hisat2_align_sam_to_bam.sh)
 
 After initial filtering, trimming, and quality control of the raw reads, the next step is to align the raw reads. We used HISAT2 to align the raw reads to the reference transcriptome.
 for redundancy we also used bwa and salmon to see if it caused any significant changes to the final count data. 

@@ -2,8 +2,13 @@
 # clearing envs
 rm(list=ls())
 
-# setwd to home dir
+# installing the package
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
 
+BiocManager::install("edgeR")
+
+# loading the package
 library(edgeR)
 
 x <- read.table("combined_counts_amrPa_ksu.txt", header = TRUE, row.names = "GeneID", sep = '\t')

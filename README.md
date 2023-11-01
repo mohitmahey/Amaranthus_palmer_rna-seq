@@ -54,7 +54,28 @@ fastp -i ${file}_R1_001.fastq.gz  -I ${file}_R2_001.fastq.gz -o ${data}/cleaned_
 ## 3 - aliging the raw reads to the transcriptome
 
 After initial filtering, trimming, and quality control of the raw reads, the next step is to align the raw reads. We used HISAT2 to align the raw reads to the reference transcriptome.
-for redundancy we also used bwa and salmon to see if it caused any significant changes to the final count data.
+for redundancy we also used bwa and salmon to see if it caused any significant changes to the final count data. (3_hisat2_align_sam_to_bam.sh)
+
+To run the aligner, we need 
+a. cleaned forward reads (made in previous using fastp) 
+b. cleaned reverse reads (made in previous using fastp) 
+c. Indexed reference transcriptome to be aligned.
+
+```
+# building the genome index 
+hisat2-build -p 64 ${data}/genome/Amaranthus_palmeri_reference.transcripts.fa \
+${data}/genome/Amaranthus_palmeri
+
+hisat2 -p 64 --quiet \
+               -x ${data}/genome/Amaranthus_palmeri \
+               -1 ${data}/cleaned_files/${file}_R1.fastq \
+               -2 ${data}/cleaned_files/${file}_R2.fastq \
+               -S ${data}/aligned_transcripts/${file}.sam
+```
+
+
+
+
 
 
 

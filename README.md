@@ -22,3 +22,13 @@ The raw reads was aligned to the transcriptome of amranthis palmer, to get the r
 4.EdgeR - for making comparisons between different populations and getting differentially expressed genes. http://bioconductor.org/packages/devel/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf
 
 # Procedure 
+
+## Checking the integrity of the raw fastq files
+The raw fastq file as received from the company, comes along with a hash file that can be used for checking integrity of files and to confirm that we received the files withour any loss of
+data. For this we used md5sum hash algorithm to confirm integrity.(1_chcecking_md5_raw_files.sh)
+
+```
+ls -1 *.md5 | while read line; do cat $line ; done | md5sum -c > md5_integrity_check.txt
+```
+here we are making a list of all the .md5 files and combining it into a singlelist that can be used to to perform md5sum check.
+

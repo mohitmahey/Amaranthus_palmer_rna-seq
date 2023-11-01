@@ -118,6 +118,108 @@ awk '{print $1, $3}' counts_${file}.txt > counts_reads_${file}.txt
 After you have the counts file in the txt form, you can combine all of them in excel to get combine_counts file, that can 
 be used as an input in the edgeR package to get Differentially expressed genes. Save it as .txt file that can be loaded in R later on.
 
+# Diffential gene expression analysis using EdgeR
+
+EdgeR was used to find differentially expressed genes.
+
+## Dissecting the code
+
+Firstly, the environment is cleaned and the required packages are loaded 
+
+```
+# clearing envs
+rm(list=ls())
+
+# installing the package
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("edgeR")
+
+# loading the package
+library(edgeR)
+```
+
+The combined_counts data is loaded in to the R environment
+
+```
+# loading in the combined counts data 
+x <- read.table("combined_counts_amrPa_ksu.txt", header = TRUE, row.names = "GeneID", sep = '\t')
+```
+
+For EdgeR, grouping of the treatments is needed. in this case as there are 5 treaments and a control, there will be 6 groups with 3 replicated each.
+This grouping is important as to make comparisons later on.
+
+```
+# This is when comparing each with each, it follows the above classification
+group <- factor(c(1,1,1,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,6,6,6,7,7,7,8,8,8,9,9,9,10,10,10))
+```
+
+then the groups are assigned to different treatments
+
+```
+# assigning groups to each group
+y <- DGEList(counts = x,group = group)
+y$samples
+```
+
+Filtering the low counts
+
+```
+# filtering out low reads from the reads counts
+keep <- filterByExpr(y)
+summary(keep)
+table(keep)
+y <- y[keep, , keep.lib.sizes=FALSE]
+y$samples
+```
+
+Normalisation of the counts data to prevent bias based on the library size.
+
+```
+# Normalising the reads
+y <- calcNormFactors(y)
+y$samples
+```
+
+making  model design 
+```
+# making the design to do the comparisons and contrast, 10 groups are formed based on 
+# grouping described in lines 13- 22
+design <- model.matrix(~0+group, data = y$samples)
+```
+Running the model to find the differential expression
+
+```
+y <- estimateDisp(y, design, robust = TRUE)
+y$common.dispersion
+
+plotBCV(y)
+
+fit <- glmQLFit(y, design, robust=TRUE)
+plotQLDisp(fit)
+```
+
+doing the comparisons , here the comparison between resistant population non-treated with susceptible population non-treated
+```
+qlf.R_NTvS_NT<- glmQLFTest(fit, contrast = c(1,0,0,0,0,-1,0,0,0,0))
+write.table(qlf.R_NTvS_NT, "R_NTvS_NT.txt")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -11,6 +11,7 @@ BiocManager::install("edgeR")
 # loading the package
 library(edgeR)
 
+# loading in the combined counts data 
 x <- read.table("combined_counts_amrPa_ksu.txt", header = TRUE, row.names = "GeneID", sep = '\t')
 View(x)
 

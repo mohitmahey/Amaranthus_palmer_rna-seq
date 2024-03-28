@@ -1,15 +1,15 @@
-# Amaranthus_palmer_rna-seq
+# Amaranthus_palmeri_rna-seq
 
-Differential gene expression analysis and Weighted co-expression analysis of Amaranthus palmer. 
+Differential gene expression analysis and Weighted co-expression analysis of Amaranthus palmeri. 
 
 # Experimental Design
 
-Susceptible and Resistant Amaranthus palmer was cloned and treated with five different herbicides - Atrazine, 24D, chlorosulfuron, mesotrione.
+Susceptible and Resistant Amaranthus palmeri was cloned and treated with five different herbicides - Atrazine, 2,4,-D, chlorosulfuron, mesotrione and lactofen.
 The RNA was extracted and sequenced using Illumina hi-seq 150 bp sequencing.
 
 # Aligning the raw RNA-seq reads to the transcriptome
 
-The raw reads were aligned to the transcriptome of amaranthus palmer, to get the read count data that was used further for the DGE and WGCNA analysis
+The raw reads were aligned to the transcriptome of amaranthus palmeri, to get the read count data that was used further for the DGE analysis and WGCNA. 
 
 # Tools used
 
@@ -27,8 +27,7 @@ The raw reads were aligned to the transcriptome of amaranthus palmer, to get the
 # Procedure 
 
 ## 1 - Checking the integrity of the raw fastq files(1_checking_md5_raw_files.sh)
-The raw fastq file as received from the company, comes along with a hash file that can be used for checking integrity of files and to confirm that we received the files withour any loss of
-data. For this we used md5sum hash algorithm to confirm integrity.
+The raw fastq file as received from the company, comes along with a hash file that can be used for checking integrity of files and to confirm that we received the files without any loss of data. For this we used md5sum hash algorithm to confirm integrity.
 
 ```
 ls -1 *.md5 | while read line; do cat $line ; done | md5sum -c > md5_integrity_check.txt
@@ -37,8 +36,7 @@ here we are making a list of all the .md5 files and combining it into a singleli
 
 ## 2 - Trimming adapters, cleaing bad reads and quality check(2_fastp_trimming.sh)
 
-fastp is a command-line tool that can trim the adapter sequences, filter low quality reads and provide quality control files for the raw reads. it provides the quality control files in html and json format,
-to see the quality of the sequences. 
+fastp is a command-line tool that can trim the adapter sequences, filter low quality reads and provide quality control files for the raw reads. it provides the quality control files in html and json format, to see the quality of the sequences. 
 
 ```
 fastp -i ${file}_R1_001.fastq.gz  -I ${file}_R2_001.fastq.gz -o ${data}/cleaned_files/${file}_R1.fastq -O ${data}/cleaned_files/${file}_R2.fastq -w 64 \
@@ -54,7 +52,7 @@ fastp -i ${file}_R1_001.fastq.gz  -I ${file}_R2_001.fastq.gz -o ${data}/cleaned_
 -j = file name of quality control file in json format \
 -h = file name of quality control file in html format
 
-## 3 - aligning the raw reads to the transcriptome(3_hisat2_align_sam_to_bam.sh)
+## 3 - aligning the raw reads to the transcriptome (3_hisat2_align_sam_to_bam.sh)
 
 After initial filtering, trimming, and quality control of the raw reads, the next step is to align the raw reads. We used HISAT2 to align the raw reads to the reference transcriptome.
 for redundancy we also used bwa and salmon to see if it caused any significant changes to the final count data. 

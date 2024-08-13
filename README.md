@@ -21,7 +21,10 @@ The raw reads were aligned to the transcriptome of amaranthus palmeri, to get th
 
 4. EdgeR - for making comparisons between different populations and getting differentially expressed genes. http://bioconductor.org/packages/devel/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf
 
-5. WGCNA - for weighed co-expression anaylsis among different populations, Langfelder, P., Horvath, S. WGCNA: an R package for weighted correlation network analysis. BMC Bioinformatics 9, 559 (2008). https://doi.org/10.1186/1471-2105-9-559
+5. STAR - tool for aliging raw reads to reference (5.	Dobin A, Davis CA, Schlesinger F, Drenkow J, Zaleski C, Jha S, Batut P, Chaisson M, Gingeras TR. STAR: ultrafast universal RNA-seq aligner. Bioinformatics. 2013 Jan 1;29(1):15-21. doi: 10.1093/bioinformatics/bts635. Epub 2012 Oct 25. PMID: 23104886; PMCID: PMC3530905.)
+
+
+6. WGCNA - for weighed co-expression anaylsis among different populations, Langfelder, P., Horvath, S. WGCNA: an R package for weighted correlation network analysis. BMC Bioinformatics 9, 559 (2008). https://doi.org/10.1186/1471-2105-9-559
 
    
 # Procedure 
